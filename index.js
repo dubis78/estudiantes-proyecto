@@ -1,7 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-
+const actores = require("./routes/actores");
+require('dotenv').config();
 
 //Middlewares
 app.use(morgan("dev")); //Monitorear las peticiones
@@ -11,13 +12,15 @@ app.get("/", (req,res) => {
   res.send('<h1>Holis</h1>');
 });
 
-app.get("/estudiantes", (req,res) => {
-  let estudiantes=[];
-  estudiantes.push({nombre:'juan',apelliso:'perez'});
-  res.json(estudiantes);
-});
+app.use("/api", actores);
 
-app.set("port", 3000);
+// app.get("/estudiantes", (req,res) => {
+//   let estudiantes=[];
+//   estudiantes.push({nombre:'juan',apelliso:'perez'});
+//   res.json(estudiantes);
+// });
+
+app.set('port', process.env.PORT || 3000);
 app.listen(app.get("port"), () => {
-  console.log(`Servidor corriendo en el puerto 3000`);
+  console.log(`Servidor corriendo en el puerto ${app.get('port')}!`);
 });
