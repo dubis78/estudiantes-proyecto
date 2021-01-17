@@ -9,7 +9,7 @@ const connection_mysql = mysql.createConnection({
     database : process.env.DB_DATABASE, 
     port : process.env.DB_PORT
 })
-//const promiseConnection_mysql=connection_mysql.promise();
+const promiseConnection_mysql=connection_mysql.promise();
 module.exports = {
-    cnn_mysql : connection_mysql
+    cnn_mysql : promiseConnection_mysql
 }
